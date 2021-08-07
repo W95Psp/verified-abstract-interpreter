@@ -1,0 +1,136 @@
+<script>
+let tests = {"conjuction1.c":"// --initial-memory 'a=[5,15]; b=[5,20]; c=[5,56]'\n// --final-memory   'a=[7,9] ; b=[6,8];  c=[5,7]'\n\nassume ((b < a) && ((c < b) && (a < 10)))\n\n\n","decreasing_loop.c":"// --initial-memory a:[-3,3]\n// --final-memory a:[-52,6]\n// --disable-widening\n\na = a * 2;\nloop {\n  assume (-50 < a);\n  a = a - 3\n}\n","decreasing_loop_widening.c":"// --initial-memory a:[-3,3]\n// --final-memory a:[-64,6]\n\na = a * 2;\nloop {\n  assume (-50 < a);\n  a = a - 3\n}\n","disjunction1.c":"// --initial-memory 'a=[5,15]; b=[5,15]'\n// --final-memory   'a=T; b=T;c=T;d=T'\n\nloop {\n  assume ((a < 50) || (b < 50));\n  a = a + 1;\n  b = b + 1\n}\n\n","disjunction_simple_true_false.c":"// --initial-memory 'a=[5,15]'\n// --final-memory   'a=[5,50]'\n// --disable-widening\n\nloop {\n  assume ((a < 50) || (5 < b));\n  a = a + 1\n}\n\n","disjunction_simple_true_false_widening.c":"// --initial-memory 'a=[5,15]'\n// --final-memory   'a=[5,64]'\n\nloop {\n  assume ((a < 50) || (5 < b));\n  a = a + 1\n}\n\n","increasing_loop.c":"// --initial-memory a:[-10,10]\n// --final-memory a:[-5,33]\n// --disable-widening\n\na = a + 5;\nloop {\n  assume (a < 30);\n  a = a + 4\n}\n","increasing_loop_widening.c":"// --initial-memory a:[-10,10]\n// --final-memory a:[-5,64]\n\na = a + 5;\nloop {\n  assume (a < 30);\n  a = a + 4\n}\n"}</script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="ansi_up.js"></script>  
+<script type="text/javascript" src="analyser.js"></script>
+
+<script>
+  // dirty hack to redirect stdout
+  function run(v){
+      let old_console = console;
+      let out = '';
+      globalThis.console = Object.assign(Object.assign({}, console), {
+	  log: (...args) => {
+	      out += args.join('') + '\n';
+	  }
+      });
+      try {
+	  analyser.analyse(v)
+      } catch (e) {}
+      globalThis.console = old_console;
+      let ansi_up = new AnsiUp;
+      let html = ansi_up.ansi_to_html(out);
+      document.getElementById('output').innerHTML =
+	  `<b>${new Date()}</b><br/><br/>`
+	  + html
+          + '<br/><br/><br/><div class="nest-previous-code">'
+	  + document.getElementById('output').innerHTML + '</div>'
+      ;
+  }
+  function loadExample(){
+      let name = document.getElementById("ex").value;
+      editor.setValue('// Example "'+name.replace(/\.c$/, '')+'"\n' + tests[name]);
+      document.getElementById("ex").value = "";
+  }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.js" integrity="sha512-LwxFyHyqmDdcint8dhTSHeJuI+uH5r/vrcGkxH4QhHGP8SpNaS9MVa1BxZRNTb1GPyLBAWrjbWpZTPGgtDgJOw==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/codemirror.min.css" integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw==" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.61.0/mode/clike/clike.min.js" integrity="sha512-m3ghu/xpRyZKDD9RVnxZIT8+lYTjrh7tAz7xbj94du1+3voHC2llSKQQOywnxkYzPcjexBUwf2nhGV9caxlEZw==" crossorigin="anonymous"></script>
+
+<style>
+  body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      box-sizing: border-box;
+  }
+  body {
+      display: grid;
+      height: 100%;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto 1fr;
+      gap: 0px 0px;
+      grid-template-areas:
+	  "header header"
+	  "toolbar out"
+	  "code out";
+  }
+  h1 {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      margin: 0;
+      font-weight: 300;
+      text-align: center;
+      grid-area: header;
+      box-shadow: 0 0 7px #00000022;
+      z-index: 10;
+  }
+  section {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+  }
+  #toolbar {
+      grid-area: toolbar;
+      padding: 4px;
+      background: #7f8c8d;
+  }
+  #toolbar #examples {
+      float: right;
+  }
+  #tinput {
+      grid-area: code;
+  }
+  section#out {
+      grid-area: out;
+      background: #dfe4ea;
+      overflow: auto;
+  }
+  #output .nest-previous-code {
+      opacity: 0.6;
+      filter: grayscale(0.7);
+  }
+  #output .nest-previous-code .nest-previous-code {
+      opacity: 0.9;
+  }
+  pre {
+      padding: 20px;
+  }
+</style>
+
+<body>
+  <h1>Demo of the analyser from the paper "Verified functional programming of an abstract interpreter"</h1>
+  <div id='tinput'>
+    <textarea id='input'></textarea>
+  </div>
+  <div id='toolbar'>
+    <button id='run' onclick='run(editor.getValue())'>Run ⚙</button>
+    <div id='examples'>
+      <select onchange='loadExample()' id='ex'>
+	<option value="">Load an example...</option>
+      </select>
+      <!-- <button onclick='editor.setValue(tests[document.getElementById("ex").value])'>load example</button> -->
+    </div>
+  </div>
+  <section id='out'>
+    <pre id='output'></pre>
+  </section>
+</body>
+
+<script>
+  window.tests = window.tests || {dummy: 'a = 3'};
+  function setup (){
+      document.getElementById('ex').innerHTML += Object.entries(tests).map(([n,c]) => `<option value="${n}">${n.replace(/\.c$/, '')}</option>`);
+  };
+  var editor = CodeMirror.fromTextArea(document.getElementById('input'), {
+      lineNumbers: true, mode: "text/x-csrc",
+  });
+  editor.setSize("100%", "100%");
+  editor.setValue(tests['increasing_loop.c']);
+  setup();
+</script>
