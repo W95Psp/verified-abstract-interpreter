@@ -1,0 +1,152 @@
+\usepackage[outputdir=latex.out]{minted}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{xpatch,letltxmacro}
+\usepackage{newunicodechar}
+\usepackage{lmodern}
+\usepackage{stmaryrd}
+\usepackage{todo}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{breakurl}
+\usepackage{tikz}
+\usepackage{calc}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{wrapfig}
+\usepackage[inline]{enumitem}
+
+\newcommand{\memdom}{\fcode{AMem_dom}}
+\newcommand{\shortdots}{.\!.\!.}
+\newcommand{\addressable}{\fcode{addressable}}
+
+
+% \usepackage{draftwatermark}
+% \SetWatermarkText{\sffamily{draft}}
+% \SetWatermarkScale{1}
+
+\newlist{enumi}{enumerate*}{1}
+\setlist*[enumi,1]{%
+  label=(\roman*),
+}
+
+\input{latex/unicode}
+
+% \newcommand{\Arrow}[1]{%
+%      \parbox{#1}{\tikz{\draw[->](0,0)--(#1,0);}}
+% }
+% \newcommand{\printtowidth}[2]{\makebox[\widthof{#1}]{#2}}
+% \newcommand{\onecharwidth}[1]{\printtowidth{x}{#1}}
+% \newcommand{\twocharwidth}[1]{\printtowidth{xx}{#1}}
+% \newcommand{\threecharwidth}[1]{\printtowidth{xxx}{#1}}
+% \newcommand{\fourcharwidth}[1]{\printtowidth{xxxx}{#1}}
+
+% \newcommand{\printtowidthL}[2]{\makebox[\widthof{#1}][l]{#2}}
+% \newcommand{\onecharwidthL}[1]{\printtowidthL{x}{#1}}
+% \newcommand{\twocharwidthL}[1]{\printtowidthL{xx}{#1}}
+% \newcommand{\threecharwidthL}[1]{\printtowidthL{xxx}{#1}}
+% \newcommand{\fourcharwidthL}[1]{\printtowidthL{xxxx}{#1}}
+
+% %% \usepackage{cancel}
+% %% \newcommand{\notPropEq}{\twocharwidth{\cancel{\tt==}}}
+% \newcommand{\notPropEq}{\twocharwidth{\rlap{\hspace{1.1mm}/}\texttt{=\hspace{0.3mm}=}}}
+
+% \newunicodechar{∈}{\onecharwidth{$\in$}}
+% \newunicodechar{⊆}{\onecharwidth{$\subseteq$}}
+% \newunicodechar{⊑}{\onecharwidth{\scalebox{0.8}[0.95]{$\sqsubseteq$}}}
+% \newunicodechar{∪}{\onecharwidth{$\cup$}}
+% \newunicodechar{∩}{\onecharwidth{$\cap$}}
+% \newunicodechar{⊔}{\onecharwidth{$\sqcup$}}
+% \newunicodechar{⊓}{\onecharwidth{$\sqcap$}}
+% \newunicodechar{γ}{\onecharwidth{$\gamma$}}
+% \newunicodechar{→}{\onecharwidth{~\Arrow{.18cm}}}
+% \newunicodechar{⇒}{\threecharwidth{$\implies$}}
+% \newunicodechar{∖}{\onecharwidth{$\setminus$}}
+
+% \newunicodechar{ℤ}{\onecharwidth{$\mathbb Z$}}
+% \newunicodechar{ℕ}{\onecharwidth{$\mathbb N$}}
+% \newunicodechar{β}{\onecharwidth{$\beta$}}
+
+% \newunicodechar{ⵌ}{\onecharwidth{${{}^\#}$}}
+% \newunicodechar{⊕}{\onecharwidth{$\oplus$}}
+% % thin space
+% \newunicodechar{ }{\,}
+
+% \newunicodechar{⊤}{\onecharwidth{$\top$}}
+% \newunicodechar{⊥}{\onecharwidth{$\bot$}}
+% \newunicodechar{λ}{\onecharwidth{$\lambda$}}
+% \newunicodechar{∨}{\onecharwidth{$\vee$}}
+% \newunicodechar{∧}{\onecharwidth{$\wedge$}}
+% \newunicodechar{≠}{\onecharwidth{$\neq$}}
+% \newunicodechar{∃}{\onecharwidth{$\exists$}}
+% \newunicodechar{∀}{\onecharwidth{$\forall$}}
+% \newunicodechar{×}{\onecharwidth{$\times$}}
+% \newunicodechar{≤}{\onecharwidth{$\leq$}}
+% \newunicodechar{≥}{\onecharwidth{$\geq$}}
+% \newunicodechar{⇔}{\threecharwidth{$\iff$}}
+
+% \newunicodechar{⦇}{\onecharwidth{$\llparenthesis$}}
+% \newunicodechar{⦈}{\onecharwidth{$\rrparenthesis$}}
+
+% \newunicodechar{₀}{\onecharwidth{${}_0$}}
+% \newunicodechar{₁}{\onecharwidth{${}_1$}}
+% \newunicodechar{₂}{\onecharwidth{${}_2$}}
+% \newunicodechar{₃}{\onecharwidth{${}_3$}}
+% \newunicodechar{₄}{\onecharwidth{${}_4$}}
+% \newunicodechar{₅}{\onecharwidth{${}_5$}}
+% \newunicodechar{₆}{\onecharwidth{${}_6$}}
+% \newunicodechar{₇}{\onecharwidth{${}_7$}}
+% \newunicodechar{₈}{\onecharwidth{${}_8$}}
+% \newunicodechar{₉}{\onecharwidth{${}_9$}}
+% \newunicodechar{ⁿ}{\onecharwidth{${}^n$}}
+
+% \newcommand{\oneCharSub}[1]{\onecharwidth{${}_{\texttt{#1}}$}}
+% \newcommand{\twoCharSub}[1]{\twocharwidth{${}_{\texttt{#1}}$}}
+% \newcommand{\threeCharSub}[1]{\threecharwidth{${}_{\texttt{#1}}$}}
+% \newcommand{\fourCharSub}[1]{\fourcharwidth{${}_{\texttt{#1}}$}}
+% \newcommand{\oneCharSubExp}[2]{\onecharwidth{${}_{\texttt{#1}}^{\texttt{#2}}$}}
+
+% \newcommand{\oneCharSubL}[1]{\onecharwidthL{${}_{\texttt{#1}}$}}
+% \newcommand{\twoCharSubL}[1]{\twocharwidthL{${}_{\texttt{#1}}$}}
+% \newcommand{\threeCharSubL}[1]{\threecharwidthL{${}_{\texttt{#1}}$}}
+% \newcommand{\fourCharSubL}[1]{\fourcharwidthL{${}_{\texttt{#1}}$}}
+% \newcommand{\oneCharSubExpL}[2]{\onecharwidthL{${}_{\texttt{#1}}^{\texttt{#2}}$}}
+
+% \newcommand{\oneCharSubD}[1]{\onecharwidth{${}^\#_{\texttt{#1}}$}}
+% \newcommand{\twoCharSubD}[1]{\twocharwidth{${}^\#_{\texttt{#1}}$}}
+% \newcommand{\threeCharSubD}[1]{\threecharwidth{${}^\#_{\texttt{#1}}$}}
+% \newcommand{\fourCharSubD}[1]{\fourcharwidth{${}^\#_{\texttt{#1}}$}}
+
+% \newcommand{\oneCharSubLD}[1]{\onecharwidthL{${}^\#_{\texttt{#1}}$}}
+% \newcommand{\twoCharSubLD}[1]{\twocharwidthL{${}^\#_{\texttt{#1}}$}}
+% \newcommand{\threeCharSubLD}[1]{\threecharwidthL{${}^\#_{\texttt{#1}}$}}
+% \newcommand{\fourCharSubLD}[1]{\fourcharwidthL{${}^\#_{\texttt{#1}}$}}
+
+
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{} % see https://tex.stackexchange.com/a/401250/
+\makeatother
+
+\input{latex/glossary.tex}
+\input{latex/commands.tex}
+
+\def\AbIntImp{\textrm{IMP}}
+
+
+
+
+
+
+
+
+%% \title{A formally verified abstract interpreter written in F*}
+\title{Verified Functional Programming \\of an Abstract Interpreter}
+
+%% \author{First Author\inst{1} \and
+%% Second Author\inst{2,3} \and
+%% Third Author\inst{3}}
+
+\usepackage{cleveref}

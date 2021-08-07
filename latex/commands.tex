@@ -1,0 +1,70 @@
+% -*- TeX-master: "../main.tex" -*-
+
+\LetLtxMacro{\cminted}{\minted}
+\let\endcminted\endminted
+\xpretocmd{\cminted}{\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}}{}{}
+
+% \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\newmintinline[fcode]{./latex/fstar.py -x}{escapeinside=!!,mathescape=true}%
+\newmintinline[fcodemm]{./latex/fstar.py -x}{escapeinside=!!,mathescape=true}%
+\newminted[fstarcode]{./latex/fstar.py -x}{autogobble,escapeinside=!!,mathescape=true}%
+\newmintedfile[inputfstar]{./latex/fstar.py -x}{autogobble,escapeinside=!!,mathescape=true}%
+
+
+\LetLtxMacro{\cfstarcode}{\fstarcode}
+\let\endcfstarcode\endfstarcode
+\xpretocmd{\cfstarcode}{\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}}{}{}
+
+\newcommand{\shorteq}{\resizebox{4pt}{\height}{=}}
+\newcommand{\shortgt}{\resizebox{4pt}{\height}{\textgreater}}
+\newcommand{\bindSymbol}{%
+   \textrm{\shortgt\kern-2pt\shortgt\kern-1pt\shorteq}%
+}
+
+\newtheorem{assumption}{Assumption}
+
+
+
+% define environment fequation
+\def\fEQlabel{}%
+\newif\ifflagFEQLabel%
+\makeatletter
+\newcommand{\customlabel}[2]{%
+   \protected@write \@auxout {}{\string \newlabel {#1}{{#2}{\thepage}{#2}{#1}{}} }%
+   \hypertarget{#1}{}%
+}
+\makeatother
+\LetLtxMacro{\fequation}{\cfstarcode}%
+\let\endfequation\endcfstarcode%
+\xpretocmd{\fequation}{%
+\noindent%
+  \list{}{\rightmargin=0pt\leftmargin=0pt}\item\relax%
+  \LetLtxMacro{\savelabel}{\label}%
+  \vspace{5.5pt}%
+  \flagFEQLabelfalse%
+  \ifdefempty{\fEQlabel}{}{\flagFEQLabeltrue}%
+  \ifflagFEQLabel%
+  \stepcounter{equation}%
+  \customlabel{\fEQlabel}{\theequation}%
+  \minipage{1\linewidth}%
+  \fi%
+  \centering%
+}{}{}%
+\xapptocmd{\endfequation}{%
+  \ifflagFEQLabel%
+  \endminipage%
+  \kern-0.6cm\minipage{0.04\linewidth}%
+  \flushright%
+  \eqref{\fEQlabel}%
+  \endminipage%
+  \fi%
+  \vspace{5.5pt}%
+  \endlist%
+  \def\fEQlabel{}%
+  \global\def\fEQlabel{}%
+}{}{}%
+
+\newcommand{\fLabel}[1]{\global\def\fEQlabel{#1}}
+
+\def\bang{!}
+

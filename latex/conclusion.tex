@@ -1,0 +1,73 @@
+\section{Conclusion and further works}%
+\label{abint:section:conclusion}%
+
+We presented almost the entire code of our abstract interpreter for $\AbIntImp{}$.
+%
+Our approach to abstract interpretation is concretization-based, and
+follows the methodology of~\cite{SAS13:Blazy:al,POPL15:Jourdan:al}.
+%
+While using \gls{fstar}, we did not encountered any issue regarding
+expressiveness, and additionally gained a lot in proof automatization,
+to finally implement a fairly modular abstract interpreter.
+The table below compares the line-of-proof vs. line-of-code ratio of
+our implementation compared to some of the available verified abstract
+interpreters.
+%
+Ours is up to 17 times more proof efficient.
+%
+It is very compact, and requires a negligible amount of manual proofs.
+%
+This comparison has its limits, since the different formalizations do
+not target the same programming languages:~\cite{POPL15:Jourdan:al}
+and~\cite{SAS13:Blazy:al} handles the full C language,
+while~\cite{ITP10:Cachera:Pichardie} and the curent paper deal with
+more simple imperative languages.
+%
+Also, proof effort usually does not scale linearly.
+
+\begin{table}%{l}{0.5\textwidth}
+  \centering%
+  \setlength{\tabcolsep}{2mm}
+  \begin{tabular}{rrrcl}
+     & Code & Proof & Ratio & Feature set\\
+    \hline
+    This paper
+    & 487   & 39    & 0.08 & Simple imperative language
+    \\
+    Pichardie et al.~\cite{ITP10:Cachera:Pichardie}
+    & 3\,725  & 5\,020  & 1.35 & Simple imperative language
+    \\
+    Verasco~\cite{POPL15:Jourdan:al}
+    & 16\,847 & 17\,040 & 1.01 & CompCert C langage
+    \\
+    Blazy et al.~\cite{SAS13:Blazy:al}
+    & 4\,000  & 3\,500  & 0.87 & CompCert C langage
+  \end{tabular}%
+\end{table}
+
+
+The sources of our abstract interpreter sources are available along
+with a set of example programs; building it natively or as a web
+application is easy, reproducible\footnote{
+  Our build process relies on the purely functional Nix package manager.%
+} and automated.
+
+This work is very far from the scope of Verasco which required about
+four years of human
+time~\cite{laporte:tel-01285624,jourdan:tel-01327023}, but our
+results, which required 3 months of work with \gls{fstar} expertise,
+are very encouraging.
+
+\paragraph{Further work} We aim at following the path of Verasco by adding
+real-world features to our abstract interpreter and consider a more
+realistic target language such as one of the CompCert C-like input
+languages.
+%
+One of the weakenesses of Verasco is its efficiency. Using
+\gls{lowstar}, a C DSL for \gls{fstar}, it is possible to write (with
+a nontrivial additionnal effort related to \gls{lowstar}) a very
+efficient C and formally verified abstract interpreter.
+%
+This development also opens the path for enriching \gls{fstar}
+automation via verified abstract interpretation.
+

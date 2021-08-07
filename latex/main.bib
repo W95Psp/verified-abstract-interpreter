@@ -1,0 +1,292 @@
+@inproceedings{metafstar,
+  author = {Guido Mart\'inez and
+            Danel Ahman and
+            Victor Dumitrescu and
+            Nick Giannarakis and
+            Chris Hawblitzel and
+            Catalin Hritcu and
+            Monal Narasimhamurthy and
+            Zoe Paraskevopoulou and
+            Cl\'ement Pit-Claudel and
+            Jonathan Protzenko and
+            Tahina Ramananandro and
+            Aseem Rastogi and
+            Nikhil Swamy},
+  title = {{Meta-F*}:  Proof Automation with {SMT}, Tactics, and Metaprograms},
+  booktitle = {28th European Symposium on Programming (ESOP)},
+  shortbooktitle = {ESOP},
+  pages     = {30--59},
+  year      = {2019},
+  month     = april,
+  url       = {https://fstar-lang.org/papers/metafstar},
+}
+
+@inproceedings{z3,
+  title={Z3: An efficient SMT solver},
+  author={De Moura, Leonardo and Bj{\o}rner, Nikolaj},
+  booktitle={International conference on Tools and Algorithms for the Construction and Analysis of Systems},
+  pages={337--340},
+  url={http://www.audentia-gestion.fr/MICROSOFT/z3.pdf},
+  year={2008}
+}
+
+@misc{project-everest, title={Provably Secure Communication Software, \rm\url{https://project-everest.github.io/}}, url={https://project-everest.github.io/}}
+ 
+@inproceedings{compcert,
+  title={CompCert-a formally verified optimizing compiler},
+  author={Leroy, Xavier and Blazy, Sandrine and K{\"a}stner, Daniel and Schommer, Bernhard and Pister, Markus and Ferdinand, Christian},
+  booktitle={ERTS 2016: Embedded Real Time Software and Systems, 8th European Congress},
+  year={2016}
+}
+@inproceedings{astree,
+  title={The ASTR{\'E}E analyzer},
+  author={Cousot, Patrick and Cousot, Radhia and Feret, J{\'e}r{\^o}me and Mauborgne, Laurent and Min{\'e}, Antoine and Monniaux, David and Rival, Xavier},
+  booktitle={European Symposium on Programming},
+  pages={21--30},
+  year={2005}
+}
+
+
+@inproceedings{klein2009sel4,
+  title={seL4: Formal verification of an OS kernel},
+  author={Klein, Gerwin and Elphinstone, Kevin and Heiser, Gernot and Andronick, June and Cock, David and Derrin, Philip and Elkaduwe, Dhammika and Engelhardt, Kai and Kolanski, Rafal and Norrish, Michael and others},
+  booktitle={Proceedings of the ACM SIGOPS 22nd symposium on Operating systems principles},
+  pages={207--220},
+  url={http://web1.cs.columbia.edu/~junfeng/09fa-e6998/papers/sel4.pdf},
+  year={2009}
+}
+
+@inproceedings{gonthier2007four,
+  title={The four colour theorem: Engineering of a formal proof},
+  author={Gonthier, Georges},
+  booktitle={Asian Symposium on Computer Mathematics},
+  pages={333--333},
+  url={https://dl.acm.org/doi/10.1007/978-3-540-87827-8_28},
+  year={2007}
+}
+
+
+@inproceedings{haclstar,
+author = {Zinzindohou\'{e}, Jean-Karim and Bhargavan, Karthikeyan and Protzenko, Jonathan and Beurdouche, Benjamin},
+title = {HACL: A Verified Modern Cryptographic Library},
+year = {2017},
+isbn = {9781450349468},
+publisher = {Association for Computing Machinery},
+url = {https://doi.org/10.1145/3133956.3134043},
+doi = {10.1145/3133956.3134043},
+abstract = {HACL* is a verified portable C cryptographic library that implements modern cryptographic primitives such as the ChaCha20 and Salsa20 encryption algorithms, Poly1305 and HMAC message authentication, SHA-256 and SHA-512 hash functions, the Curve25519 elliptic curve, and Ed25519 signatures.HACL* is written in the F* programming language and then compiled to readable C code. The F* source code for each cryptographic primitive is verified for memory safety, mitigations against timing side-channels, and functional correctness with respect to a succinct high-level specification of the primitive derived from its published standard. The translation from F* to C preserves these properties and the generated C code can itself be compiled via the CompCert verified C compiler or mainstream compilers like GCC or CLANG. When compiled with GCC on 64-bit platforms, our primitives are as fast as the fastest pure C implementations in OpenSSL and libsodium, significantly faster than the reference C code in TweetNaCl, and between 1.1x-5.7x slower than the fastest hand-optimized vectorized assembly code in SUPERCOP.HACL* implements the NaCl cryptographic API and can be used as a drop-in replacement for NaCl libraries like libsodium and TweetNaCl. HACL* provides the cryptographic components for a new mandatory ciphersuite in TLS 1.3 and is being developed as the main cryptographic provider for the miTLS verified implementation. Primitives from HACL* are also being integrated within Mozilla's NSS cryptographic library. Our results show that writing fast, verified, and usable C cryptographic libraries is now practical.},
+booktitle = {Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {1789–1806},
+numpages = {18},
+keywords = {software verification, cryptographic library, secure compilation, vectorized code, formal methods},
+location = {Dallas, Texas, USA},
+series = {CCS '17}
+}
+
+@InProceedings{bond2017vale,
+author = {Bond, Barry and Hawblitzel, Chris and Kapritsos, Manos and Leino, Rustan and Lorch, Jay and Parno, Bryan and Rane, Ashay and Setty, Srinath and Thompson, Laure},
+title = {Vale: Verifying High-Performance Cryptographic Assembly Code},
+booktitle = {Proceedings of the USENIX Security Symposium},
+year = {2017},
+month = {August},
+abstract = {High-performance cryptographic code often relies on complex hand-tuned assembly language that is customized for individual hardware platforms. Such code is difficult to understand or analyze. We introduce a new programming language and tool called Vale that supports flexible, automated verification of high-performance assembly code. The Vale tool transforms annotated assembly language into an abstract syntax tree (AST), while also generating proofs about the AST that are verified via an SMT solver. Since the AST is a first-class proof term, it can be further analyzed and manipulated by proven-correct code before being extracted into standard assembly. For example, we have developed a novel, proven-correct taint-analysis engine that verifies the code's freedom from digital side channels. Using these tools, we verify the correctness, safety, and security of implementations of SHA-256 on x86 and ARM, Poly1305 on x64, and hardware-accelerated AES-CBC on x86. Several implementations meet or beat the performance of unverified, state-of-the-art cryptographic libraries.},
+publisher = {USENIX},
+url = {https://www.microsoft.com/en-us/research/publication/vale-verifying-high-performance-cryptographic-assembly-code/},
+note = {Distinguished Paper Award},
+}
+@InProceedings{protzenko2020evercrypt,
+author = {Protzenko, Jonathan and Parno, Bryan and Fromherz, Aymeric and Hawblitzel, Chris and Polubelova, Marina and Bhargavan, Karthikeyan  and Beurdouche, Benjamin and Choi, Joonwon and Delignat-Lavaud, Antoine and Fournet, Cédric and Kulatova, Natalia and Ramananandro, Tahina and Rastogi, Aseem and Swamy, Nikhil and Wintersteiger, Christoph M. and Zanella-Béguelin, Santiago},
+title = {EverCrypt: A Fast, Veriﬁed, Cross-Platform Cryptographic Provider},
+booktitle = {IEEE Symposium on Security and Privacy},
+year = {2020},
+month = {May},
+abstract = {We present EverCrypt: a comprehensive collection of veriﬁed, high-performance cryptographic functionalities available via a carefully designed API. The API provably supports agility (choosing between multiple algorithms for the same functionality) and multiplexing (choosing between multiple implementations of the same algorithm). Through abstraction and zero-cost generic programming, we show how agility can simplify veriﬁcation without sacriﬁcing performance, and we demonstrate how C and assembly can be composed and veriﬁed against shared speciﬁcations. We substantiate the effectiveness of these techniques with new veriﬁed implementations (including hashes, Curve25519, and AES-GCM) whose performance matches or exceeds the best unveriﬁed implementations. We validate the API design with two high-performance veriﬁed case studies built atop EverCrypt, resulting in line-rate performance for a secure network protocol and a Merkle-tree library, used in a production blockchain, that supports 2.7 million insertions/sec. Altogether, EverCrypt consists of over 124K veriﬁed lines of specs, code, and proofs, and it produces over 29K lines of C and 14K lines of assembly code.},
+publisher = {IEEE},
+url = {https://www.microsoft.com/en-us/research/publication/evercrypt-a-fast-veri\%ef\%ac\%81ed-cross-platform-cryptographic-provider/},
+}
+
+@inproceedings{darais-oopsla15,
+ author = {Darais, David and Might, Matthew and Van Horn, David},
+ title = {Galois Transformers and Modular Abstract Interpreters: Reusable Metatheory for Program Analysis},
+ booktitle = {Proceedings of the 2015 ACM SIGPLAN International Conference on Object-Oriented Programming, Systems, Languages, and Applications},
+ series = {OOPSLA 2015},
+ year = {2015},
+ isbn = {978-1-4503-3689-5},
+ location = {Pittsburgh, PA, USA},
+ pages = {552--571},
+ numpages = {20},
+ url = {http://doi.acm.org/10.1145/2814270.2814308},
+} 
+@inproceedings{10.1145/2676726.2676966,
+author = {Jourdan, Jacques-Henri and Laporte, Vincent and Blazy, Sandrine and Leroy, Xavier and Pichardie, David},
+title = {A Formally-Verified C Static Analyzer},
+year = {2015},
+isbn = {9781450333009},
+publisher = {Association for Computing Machinery},
+url = {https://doi.org/10.1145/2676726.2676966},
+abstract = {This paper reports on the design and soundness proof, using the Coq proof assistant, of Verasco, a static analyzer based on abstract interpretation for most of the ISO C 1999 language (excluding recursion and dynamic allocation). Verasco establishes the absence of run-time errors in the analyzed programs. It enjoys a modular architecture that supports the extensible combination of multiple abstract domains, both relational and non-relational. Verasco integrates with the CompCert formally-verified C compiler so that not only the soundness of the analysis results is guaranteed with mathematical certitude, but also the fact that these guarantees carry over to the compiled code.},
+booktitle = {Proceedings of the 42nd Annual ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages},
+pages = {247–259},
+numpages = {13},
+keywords = {static analysis, soundness proofs, abstract interpretation, proof assistants},
+location = {Mumbai, India},
+series = {POPL '15}
+}
+
+@article{10.1145/2775051.2676966,
+author = {Jourdan, Jacques-Henri and Laporte, Vincent and Blazy, Sandrine and Leroy, Xavier and Pichardie, David},
+title = {A Formally-Verified C Static Analyzer},
+year = {2015},
+issue_date = {January 2015},
+publisher = {Association for Computing Machinery},
+volume = {50},
+number = {1},
+issn = {0362-1340},
+url = {https://doi.org/10.1145/2775051.2676966},
+abstract = {This paper reports on the design and soundness proof, using the Coq proof assistant, of Verasco, a static analyzer based on abstract interpretation for most of the ISO C 1999 language (excluding recursion and dynamic allocation). Verasco establishes the absence of run-time errors in the analyzed programs. It enjoys a modular architecture that supports the extensible combination of multiple abstract domains, both relational and non-relational. Verasco integrates with the CompCert formally-verified C compiler so that not only the soundness of the analysis results is guaranteed with mathematical certitude, but also the fact that these guarantees carry over to the compiled code.},
+journal = {SIGPLAN Not.},
+month = jan,
+pages = {247–259},
+numpages = {13},
+keywords = {proof assistants, soundness proofs, static analysis, abstract interpretation}
+}
+
+@inproceedings{whacl,
+  author = {J. Protzenko and B. Beurdouche and D. Merigoux and K. Bhargavan},
+  booktitle = {2019 IEEE Symposium on Security and Privacy (SP)},
+  title = {Formally Verified Cryptographic Web Applications in {WebAssembly}},
+  year = {2019},
+  url = {https://eprint.iacr.org/2019/542.pdf},
+  ISSN = {CFP19020-ART},
+  month={}
+}
+
+@article{valefstar,
+  title = {A Verified, Efficient Embedding of a Verifiable Assembly Language},
+  author = {Aymeric Fromherz and
+            Nick Giannarakis and
+            Chris Hawblitzel and
+            Bryan Parno and
+            Aseem Rastogi and
+            Nikhil Swamy},
+  journal = {{PACMPL}},
+  number = {{POPL}},
+  year = 2019,
+  url = {https://github.com/project-everest/project-everest.github.io/raw/master/assets/vale-popl.pdf},
+}
+
+@inproceedings{everest,
+  author = {Karthikeyan Bhargavan and
+        Barry Bond and
+        Antoine Delignat-Lavaud and
+        C\'edric Fournet and
+        Chris Hawblitzel and
+        Catalin Hritcu and
+        Samin Ishtiaq and
+        Markulf Kohlweiss and
+        Rustan Leino and
+        Jay Lorch and
+        Kenji Maillard and
+        Jianyang Pang and
+        Bryan Parno and
+        Jonathan Protzenko and
+        Tahina Ramananandro and
+        Ashay Rane and
+        Aseem Rastogi and
+        Nikhil Swamy and
+        Laure Thompson and
+        Peng Wang and
+        Santiago {Zanella-B\'eguelin} and
+        Jean-Karim Zinzindohou\'e},
+  title = {Everest: Towards a Verified, Drop-in Replacement of {HTTPS}},
+  booktitle = {2nd Summit on Advances in Programming Languages},
+  shortbooktitle = {SNAPL},
+  month = may,
+  year = 2017,
+  url = {http://drops.dagstuhl.de/opus/volltexte/2017/7119/pdf/LIPIcs-SNAPL-2017-1.pdf},
+}
+@inproceedings{Nipkow-ITP12,
+author={Tobias Nipkow},
+title={Abstract Interpretation of Annotated Commands},
+booktitle={Interactive Theorem Proving (ITP 2012)},
+editor={Beringer and Felty},series=LNCS,volume={7406},pages={116-132},year=2012}
+
+
+@phdthesis{jourdan:tel-01327023,
+  TITLE = {{Verasco: a Formally Verified C Static Analyzer}},
+  AUTHOR = {Jourdan, Jacques-Henri},
+  URL = {https://hal.archives-ouvertes.fr/tel-01327023},
+  SCHOOL = {{Universite Paris Diderot-Paris VII}},
+  YEAR = {2016},
+  MONTH = May,
+  KEYWORDS = {Formal Verification ; Coq Proof Assistant ; Abstract Intepretation ; Proof Assistant ; Octagons ; Numerical Absract Domains ; Interpretation abstraite ; Assistance charitable ; Coq ; Verification Formelle ; Octogones ; Domaines abstraits numeriques},
+  TYPE = {Theses},
+  url = {https://hal.archives-ouvertes.fr/tel-01327023/file/thesis.pdf},
+  HAL_ID = {tel-01327023},
+  HAL_VERSION = {v1},
+}
+
+@phdthesis{laporte:tel-01285624,
+  TITLE = {{Verified static analyzes for low-level languages}},
+  AUTHOR = {Laporte, Vincent},
+  URL = {https://tel.archives-ouvertes.fr/tel-01285624},
+  NUMBER = {2015REN1S078},
+  SCHOOL = {{Universit{\'e} Rennes 1}},
+  YEAR = {2015},
+  MONTH = Nov,
+  KEYWORDS = {Theorems and automated proof ; Programming languages ; Software verification ; Th{\'e}or{\`e}mes -- D{\'e}monstration automatique ; Logiciels -- V{\'e}rification ; Langages de programmation},
+  TYPE = {Theses},
+  url = {https://tel.archives-ouvertes.fr/tel-01285624/file/LAPORTE_Vincent.pdf},
+  HAL_ID = {tel-01285624},
+  HAL_VERSION = {v1},
+}
+
+
+
+@inproceedings{POPL15:Jourdan:al,
+  author = {Jacques-Henri Jourdan and
+            Vincent Laporte and
+            Sandrine Blazy and
+            Xavier Leroy and David Pichardie},
+  title = {A Formally-Verified {C} Static Analyzer},
+  booktitle = {42nd symposium Principles of Programming Languages},
+  publisher = {ACM Press},
+  year = 2015,
+  pages = {247-259},
+  url = {https://hal.archives-ouvertes.fr/tel-01327023/document}
+}
+
+@inproceedings{SAS13:Blazy:al,
+  author = {Sandrine Blazy and Vincent Laporte and Andr\'e Maroneze and David Pichardie},
+  title = {Formal Verification of a {C} Value Analysis Based on Abstract Interpretation},
+  booktitle = {SAS},
+  year = {2013},
+  series = {LNCS},
+  url = {https://arxiv.org/abs/1304.3596},
+  pages = {324-344}
+}
+
+@inproceedings{ITP10:Cachera:Pichardie,
+  author = {David Cachera and David Pichardie},
+  title = {A Certified Denotational Abstract Interpreter},
+  booktitle = {Proc. of International Conference on Interactive Theorem 
+                  Proving (ITP-10)},
+  year = {2010},
+  pages = {9-24},
+  volume = {6172},
+  series = {LNCS},
+  url = {https://hal.inria.fr/inria-00537810/document}
+}
+
+
+
+
+@phdthesis{Pich:these,
+  author = {Pichardie David},
+  title = {Interprétation abstraite en logique intuitionniste~: 
+                  extraction d'analyseurs {J}ava certifiés},
+  school = {Université Rennes~1},
+  year = {2005},
+  pdf = {papers/these-pichardie.pdf},
+  note = {In french}
+}

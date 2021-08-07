@@ -1,0 +1,126 @@
+\section{Introduction}
+
+Abstract interpretation is a theory of sound approximation.
+%
+However, most of available abstract interpreters do not formally
+establish a relation between their algorithmic theory and
+implementations.
+%
+Several abstract interpreters have been proven correct. The most
+notable one is Verasco~\cite{POPL15:Jourdan:al}, a static analyser of C
+programs that has been entirely written, specified and proved in the
+proof assistant Coq.
+%
+However, understanding the implementation and proof of Verasco
+requires an expertise with Coq and proof assistants.
+
+Proofs in Coq are achieved thanks to extensive use of proof scripts,
+that are very difficult for non expert to read.
+%
+By contrast with a handwritten proof, a Coq proof can be very verbose,
+and often does not convey a good intuition for the idea behind a
+proof.
+%
+Thus, writing and proving sound a static analyzer is a complex and
+time-consuming task: for example, Verasco requires about 17k
+lines~\cite{POPL15:Jourdan:al} of manual Coq proofs.
+%
+Such an effort, however, yields the strongest guarantees and provides
+complete trust in the static analyser.
+
+This paper showcases the implementation of a sound static
+analyser using the general-purpose functional programming language
+\gls{fstar}.
+%
+Equipped with dependent types and built-in SMT solver facilities,
+\gls{fstar} provides both an OCaml-like experience and proof assistant
+capacities. It recently shined with the Project
+Everest~\cite{project-everest}, which delivered a series of formally
+verified, high-performance, cryptographic libraries:
+%
+HACL*~\cite{haclstar}, ValeCrypt~\cite{bond2017vale} and
+EverCrypt~\cite{protzenko2020evercrypt}; that are for instance used and
+deployed in Mozilla Firefox.
+%
+While \gls{fstar} can always resort to proof scripts similar to Coq's
+ones, most proof obligations in \gls{fstar} are automatically
+discharged by the SMT solver Z3~\cite{z3}.
+
+We present an abstract interpreter equipped with the numerical
+abstract domain of intervals, forward and backward analyses of
+expressions, widening, and syntax-directed loop iteration.
+%
+This paper makes the following contributions.
+
+\begin{itemize}
+\item It demonstrates the ease of use of \gls{fstar} for verified
+  static analysis: we implement a verified abstract interpreter, and
+  show about 95\% of its 527 lines of code (proof included) directly
+  in the paper.
+  %
+\item
+  As far as we know, it is the first time SMT techniques are used for
+  verifying an abstract interpreter.
+  %
+\item
+  We gain an order of magnitude in the number of proof lines in
+  comparison with similar works implemented in Coq.
+  %
+  %% Our implementation requires proportionally at least ten times less
+  %% proof lines\ref{abint:section:conclusion} in comparison.
+  %
+
+\end{itemize}
+
+
+
+\paragraph{Related work} Efforts in verified abstract interpretation are
+numerous~\cite{Pich:these,ITP10:Cachera:Pichardie,SAS13:Blazy:al,Nipkow-ITP12},
+and go up to Verasco~\cite{POPL15:Jourdan:al}, a modular, real-world
+abstract interpreter verified in Coq.
+%
+Blazy et al.~\cite{SAS13:Blazy:al} and Verasco follow closely the
+modular design of Astrée~\cite{astree}; we exhibit a similar modularity
+on a smaller scale.
+%
+However, such analysers require a non-trivial amount of mechanized
+proofs: in constrast, this paper shows that implementing a formally
+verified abstract interpreter with very little manual proofs is
+possible.
+%
+So far, verified abstract interpreters have been focused on
+concretization-based formalizations.
+%
+The work of Darais et al.~\cite{darais-oopsla15} is the only one to
+really consider the use of galois connections.
+%
+They provide a minimalist abstract inteperter for imperative language
+but this interpreter seems very limited compared to ours.
+%
+They use the Agda proof assistant which is comparable to Coq in terms
+of proof verbosity.
+
+\paragraph{Overview} Section~\ref{abint:section:lang-def} defines $\AbIntImp{}$, the language our
+abstract interpreter deals with, to which is given an operational
+semantics in Section~\ref{abint:section:operational-sematics}.
+%
+Then Section~\ref{abint:section:abstract-domains} formalizes lattices and abstract
+domains, while Section~\ref{abint:section:intervals} instantiates them with the
+abstract domain of intervals.
+%
+Section~\ref{abint:section:specialized-adoms} derives more specific abstract domains,
+for numeric expressions and for memories.
+%
+The latter is instantiated by Section~\ref{abint:section:weakly-rel-amem}, that implements an
+abstract weakly-relational memory.
+%
+Finally, Section~\ref{abint:section:stmt-ab-int} presents the abstract interpretation
+of $\AbIntImp{}$ statements.
+
+\paragraph{}
+The \gls{fstar} development is available on
+GitHub\footnote{\url{https://github.com/W95Psp/verified-abstract-interpreter}}.
+%
+The resulting analyser is available online as a web application at
+\url{https://w95psp.github.io/verified-abstract-interpreter}.
+

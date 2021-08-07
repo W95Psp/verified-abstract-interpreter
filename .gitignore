@@ -1,0 +1,12 @@
+out
+run
+latex.out
+result
+node_modules
+main.tex
+main.synctex.gz
+main.pdf
+*.log
+static-site.sh
+latex.out
+

@@ -1,0 +1,75 @@
+%% \section{Related Work}
+
+
+%% /// While F* : mettre succes de F*
+%% /// virer polystar, astrée
+%% /// déveloipper Verasco + ref SAS13: they follow closely the modular desgin of Astrée + we exhibits similar modularity but smaller.
+
+%% Proof assistants like Coq or Isabelle have demonstrated effectiveness
+%% for conducting mathematical proofs or programs verification.
+%% %
+%% Successful applications include the verified C compiler
+%% CompCert\cite{compcert}, the demonstration of the four coulour
+%% theorem\cite{gonthier2007four}, or seL4\cite{klein2009sel4}, a
+%% verified operating system kernel.
+
+%% More recently, the \gls{fstar} language shined with the Project
+%% Everest\cite{project-everest}, which delivered a series of formally
+%% verified, high-performance, cryptography libraries:
+%% %
+%% HACL*\cite{haclstar}, ValeCrypt\cite{bond2017vale} and
+%% EverCrypt\cite{protzenko2020evercrypt}; that are for instance used and
+%% deployed in Mozilla Firefox.
+%% %
+%% \gls{fstar} is a dependently typed language that offers proof assitant
+%% features.
+%% %
+%% It heavily relies on refinement types and weakest-preconditions, and
+%% at its hearts leverages the SMT solver Z3\cite{z3}.
+%% %
+%% \gls{fstar}'s SMT nature makes proof automatic by default.
+
+
+%% Most static analysers based on abstract interpretation have not been
+%% themselves verified: thus, their analysis are always sound up to their
+%% possible implementation bugs.
+%% %
+%% Efforts in verified abstract interpretation are
+%% numerous\cite{Pich:these,ITP10:Cachera:Pichardie,SAS13:Blazy:al,Nipkow-ITP12},
+%% and go up to Verasco\cite{POPL15:Jourdan:al}, a modular, real-world
+%% abstract interpreter verified in Coq.
+%% %
+%% \cite{SAS13:Blazy:al} and Verasco\cite{POPL15:Jourdan:al} follow
+%% closely the modular design of Astrée; we exhibit a similar modularity
+%% on a smaller scale.
+
+%% Verasco\cite{} and \cite{SAS13:Blazy:al, }
+
+
+%% So far, verified abstract interpreters have been focused on
+%% concretization-based formalizations. The work of Darais et al.
+%% \cite{darais-oopsla15} is the only one to really consider the use of
+%% galois connections.
+%% %
+%% They rely on the Agda proof assitant.
+%% %
+%% They provide a minimalist abstract inteprrter for imperative language
+%% but this interpreter seems very limited compared to ours. ==> Agda
+%% c'est un peu comme Coq.
+
+%% %
+
+%% %
+%% Efforts in verified abstract interpretation are
+%% numerous\cite{Pich:these,ITP10:Cachera:Pichardie,SAS13:Blazy:al,Nipkow-ITP12}, and
+%% goes up to Verasco\cite{POPL15:Jourdan:al}, a modular, real-world
+%% abstract interpreter verified in Coq.
+%% %
+%% TODO\cite{darais-oopsla15}.
+%% %
+%% However, such analysers require a non-trivial amount of mechanized
+%% proof.
+%% %
+%% By constract, this paper shows that it is possible to implement a
+%% formally verified abstract interpreter with very little manual proof.
+
