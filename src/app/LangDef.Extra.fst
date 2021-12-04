@@ -75,6 +75,7 @@ let between_braces = between_kwd "{" "}"
 let expr_parser: parser expr =
   let rec no_rec (): parser expr =
           between_par  (admitP (()<<()); delayMe h')
+      <|> (fun _ -> Unknown) @<< exact_char '?'
       <|> Const @<< number
       <|> Var @<< varname_parser
   and h' (): parser expr = admitP (() << ()); let h = delayMe h' in
