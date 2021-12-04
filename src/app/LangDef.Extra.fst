@@ -23,14 +23,16 @@ let string_of_expr e = string_of_expr' e false
 let doc_of_choice (a b: doc unit): doc unit
   = str "choice" <+> space
     <+> lbrace <+> indent (nl <+> a) <+> nl <+> rbrace
-    <+> space <+> str "or" <+> space
+    <+> space // <+> str "or" <+> space
     <+> lbrace <+> indent (nl <+> b) <+> nl <+> rbrace
+
+let enable_pretty_print_ifs = false
 
 let rec doc_of_stmt (s: stmt): Tot (doc unit) (decreases s) = match s with
   | Assign v e -> str (string_of_varname v) <+> str " = " <+> str (string_of_expr e)
   | Assume e -> str "assume" <+> space <+> lparen <+> str (string_of_expr e) <+> rparen
   | Choice (Seq (Assume c) a) (Seq (Assume (BinOp Eq c' (Const 0))) b) ->
-           if c = c'
+           if c = c' && enable_pretty_print_ifs
            then str "if" <+> space <+> lparen <+> str (string_of_expr c) <+> rparen
            <+> lbrace <+> indent (nl <+> doc_of_stmt a) <+> nl
            <+> rbrace <+> str " else "
@@ -97,7 +99,9 @@ let stmt_parser: parser stmt =
         | (l, None) -> l
         ) @<<
         ((    (fun ((c, a), b) -> mkIf c a b) @<< ((keyword "if" <*>> between_par expr_parser) <*> between_braces h <*> (keyword "else" <*>> between_braces h))
-          <|> Loop @<< (keyword "loop" <*>> between_braces h)) <*> maybe h)
+          <|> (fun (a, b) -> Choice a b) @<< (keyword "choice" <*>> between_braces h <*> between_braces h)
+          <|> Loop @<< (keyword "loop" <*>> between_braces h)
+         ) <*> maybe h)
       end
       <|> (function 
           | (e, None) -> e
