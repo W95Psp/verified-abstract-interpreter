@@ -1,4 +1,4 @@
-ANALYSER_BINARY := "/nix/store/acwv5nypngwf2ig0qc8dkmjhwmqjg01v-AbIntFStar/bin/analyser"
+ANALYSER_BINARY := "/nix/store/61wrciw5qmqp4z1kw7ixjcwhs325v5kj-AbIntFStar/bin/analyser"
 ifdef ANALYSER_BINARY
 RUNNER := $(ANALYSER_BINARY)
 else
