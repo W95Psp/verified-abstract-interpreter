@@ -7,7 +7,7 @@ open WithBottom
 open Doc
 open MachineIntegers
 
-let string_of_binop = function | Plus -> "+" | Minus -> "-" | Mult -> "*" | Eq -> "=" | Lt -> "<" | And -> "&&" | Or -> "||"
+let string_of_binop = function | Plus -> "+" | Minus -> "-" | Mult -> "*" | Eq -> "==" | Lt -> "<" | And -> "&&" | Or -> "||"
 let string_of_varname = function | VA -> "a" | VB -> "b" | VC -> "c" | VD -> "d"
 let rec string_of_expr' e par
   = let lparen = if par then "(" else "" in
